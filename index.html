@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robot Control Panel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 8V4H8"/>
+        <rect width="16" height="12" x="4" y="8" rx="2"/>
+        <path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
+      </svg>
+      <span>Robot Control</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="#" id="navControlLink">Control Panel</a>
+      <a href="auth.html" id="navAuthLink">Login</a>
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="active">Home</a>
+    <a href="#" id="mobileControlLink">Control Panel</a>
+    <a href="auth.html" id="mobileAuthLink">Login</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content animate-fade-in">
+      <h1>Control Your Robot</h1>
+      <p>Advanced ESP32-powered robot control system with real-time camera streaming and remote operations</p>
+      <a href="#" class="btn btn-primary pulse" id="heroCtaBtn">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2 class="section-title">Features</h2>
+    <div class="features-grid">
+      <div class="feature-card animate-slide-up">
+        <div class="feature-icon">🎮</div>
+        <h3>Drive Controls</h3>
+        <p>Control your robot movement with WASD keys or on-screen buttons</p>
+      </div>
+      <div class="feature-card animate-slide-up">
+        <div class="feature-icon">📷</div>
+        <h3>Live Camera</h3>
+        <p>Real-time video streaming from ESP32-CAM module</p>
+      </div>
+      <div class="feature-card animate-slide-up">
+        <div class="feature-icon">💧</div>
+        <h3>Water Pump</h3>
+        <p>Remote control of water pump for plant watering</p>
+      </div>
+      <div class="feature-card animate-slide-up">
+        <div class="feature-icon">🤖</div>
+        <h3>Robotic Arms</h3>
+        <p>Adjustable arm positions for various tasks</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Section -->
+  <section class="why-section">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>Easy Setup</h3>
+        <p>Simple configuration with ESP32 microcontroller</p>
+      </div>
+      <div class="why-card">
+        <h3>Real-time Control</h3>
+        <p>Low latency commands for responsive control</p>
+      </div>
+      <div class="why-card">
+        <h3>Secure Access</h3>
+        <p>Login required for accessing control panel</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Robot Control System. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Check if user is logged in
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    
+    // Update navigation links
+    const navControlLink = document.getElementById('navControlLink');
+    const mobileControlLink = document.getElementById('mobileControlLink');
+    const navAuthLink = document.getElementById('navAuthLink');
+    const mobileAuthLink = document.getElementById('mobileAuthLink');
+    const heroCtaBtn = document.getElementById('heroCtaBtn');
+
+    if (isLoggedIn) {
+      // User is logged in
+      navControlLink.href = 'control.html';
+      navControlLink.textContent = 'Control Panel';
+      mobileControlLink.href = 'control.html';
+      mobileControlLink.textContent = 'Control Panel';
+      
+      navAuthLink.textContent = 'Logout';
+      navAuthLink.href = '#';
+      navAuthLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('userEmail');
+        location.reload();
+      });
+      
+      mobileAuthLink.textContent = 'Logout';
+      mobileAuthLink.href = '#';
+      mobileAuthLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('userEmail');
+        location.reload();
+      });
+
+      heroCtaBtn.href = 'control.html';
+      heroCtaBtn.textContent = 'Control Your Robot';
+    } else {
+      // User is not logged in
+      navControlLink.href = 'auth.html';
+      navControlLink.textContent = 'Control Panel';
+      mobileControlLink.href = 'auth.html';
+      mobileControlLink.textContent = 'Control Panel';
+
+      heroCtaBtn.href = 'auth.html';
+      heroCtaBtn.textContent = 'Login to Get Started';
+    }
+  </script>
+</body>
+</html>
